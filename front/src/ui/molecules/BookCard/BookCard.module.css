@@ -1,0 +1,17 @@
+.wrapper {
+  width: 18rem;
+  border: none !important;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
+  justify-content: space-between;
+}
+
+.image {
+  width: 100%;
+  max-width: 320px;
+  height: 370px;
+}

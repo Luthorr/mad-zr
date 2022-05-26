@@ -1,0 +1,5 @@
+.booksContainer {
+  justify-content: space-evenly;
+  row-gap: 2rem;
+  padding: 2rem 0;
+}

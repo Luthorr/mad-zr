@@ -1,0 +1,13 @@
+.navbar {
+  background-color: var(--pi-primary);
+  z-index: 5;
+  transition: 0.15s ease-in-out;
+}
+
+.navbarLinkContainer {
+  column-gap: 1rem;
+}
+
+.linkContainer {
+  padding: 0.5rem 0;
+}

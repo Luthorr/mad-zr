@@ -1,0 +1,10 @@
+.logo {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.logo a,
+.logo a:hover {
+  color: var(--color_black);
+  text-decoration: none;
+}
