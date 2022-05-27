@@ -1,3 +1,5 @@
+import { postOrder } from 'api/orders/actions';
+import { useMutation } from 'react-query';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/store';
 
@@ -6,3 +8,5 @@ export const useOrdersFormatter = () => {
 
   return cart.map((book) => ({ id: book.id, quantity: book.qty }));
 };
+
+export const usePostOrder = () => useMutation(postOrder);

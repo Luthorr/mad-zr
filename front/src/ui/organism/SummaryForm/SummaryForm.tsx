@@ -12,11 +12,11 @@ import styles from './SummaryForm.module.css';
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string()
-    .min(2, '*Imię nie może być krótsze niż 2 znaki')
+    .min(4, '*Imię nie może być krótsze niż 4 znaki')
     .max(100, '*Imię nie może być dłuższe niż 100 znaków')
     .required('*Imię jest wymagane'),
   last_name: Yup.string()
-    .min(2, '*Nazwisko nie może być krótsze niż 2 znaki')
+    .min(5, '*Nazwisko nie może być krótsze niż 5 znaki')
     .max(100, '*Nazwisko nie może być dłuższe niż 100 znaków')
     .required('*Nazwisko jest wymagane'),
   city: Yup.string()
