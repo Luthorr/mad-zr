@@ -16,9 +16,10 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action: PayloadAction<Book>) => {
       const bookPayload = action.payload;
-      const wasChosen = state.value.find((book) => book.id === bookPayload.id);
-      console.log(wasChosen);
-      return wasChosen
+      const alreadyChosen = !!state.value.find(
+        (book) => book.id === bookPayload.id
+      );
+      return alreadyChosen
         ? {
             value: state.value.map((book) =>
               book.id === bookPayload.id ? { ...book, qty: book.qty + 1 } : book

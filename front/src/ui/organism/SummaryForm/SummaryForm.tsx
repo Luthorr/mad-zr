@@ -3,23 +3,27 @@ import * as Yup from 'yup';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import FormError from 'ui/atoms/FormError/FormError';
+import SummaryFormProps from './SummaryForm.types';
+import CustomButton from 'ui/atoms/Button/Button';
+import ButtonVariants from 'constants/Button';
+
+import styles from './SummaryForm.module.css';
 
 const validationSchema = Yup.object().shape({
-  firstName: Yup.string()
+  first_name: Yup.string()
     .min(2, '*Imię nie może być krótsze niż 2 znaki')
     .max(100, '*Imię nie może być dłuższe niż 100 znaków')
     .required('*Imię jest wymagane'),
-  lastName: Yup.string()
+  last_name: Yup.string()
     .min(2, '*Nazwisko nie może być krótsze niż 2 znaki')
     .max(100, '*Nazwisko nie może być dłuższe niż 100 znaków')
     .required('*Nazwisko jest wymagane'),
   city: Yup.string()
     .min(2, '*Nazwa miejscowości nie może być krótsza niż 2 znaki')
     .max(100, '*Nazwa miejscowości nie może być dłuższa niż 100 znaków')
-    .required('*Nazwa miejscowości jest wymagane'),
-  zip: Yup.string()
+    .required('*Nazwa miejscowości jest wymagana'),
+  zip_code: Yup.string()
     .length(6, 'Kod pocztowy musi mieć dokładnie 6 znaków')
     .matches(
       /^[0-9]{2}(?:-[0-9]{3})?$/,
@@ -28,15 +32,20 @@ const validationSchema = Yup.object().shape({
     .required('*Kod pocztowy jest wymagany'),
 });
 
-const SummaryForm = () => {
+const SummaryForm = ({ handleSubmition }: SummaryFormProps) => {
   return (
     <>
       <h4 className='text-center py-2'>Uzupełnij dane</h4>
       <Formik
-        initialValues={{ firstName: '', lastName: '', city: '', zip: '' }}
+        initialValues={{
+          first_name: '',
+          last_name: '',
+          city: '',
+          zip_code: '',
+        }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          console.log(values);
+          handleSubmition(values);
         }}
       >
         {({
@@ -47,40 +56,56 @@ const SummaryForm = () => {
           handleChange,
           handleSubmit,
         }) => (
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className={styles.form}>
             <Row>
-              <Form.Group as={Col} xsm={12} sm={6} controlId='formFirstName'>
+              <Form.Group
+                as={Col}
+                xsm={12}
+                sm={6}
+                controlId='formFirstName'
+                className={styles.formGroup}
+              >
                 <Form.Label>Imię</Form.Label>
                 <Form.Control
-                  name='firstName'
+                  name='first_name'
                   type='text'
                   placeholder='Wpisz imię'
-                  value={values.firstName}
+                  value={values.first_name}
                   onBlur={handleBlur}
                   onChange={handleChange}
                 />
-                {touched.firstName && errors.firstName && (
-                  <FormError message={errors.firstName} />
+                {touched.first_name && errors.first_name && (
+                  <FormError message={errors.first_name} />
                 )}
               </Form.Group>
 
-              <Form.Group as={Col} controlId='formLastName'>
+              <Form.Group
+                as={Col}
+                controlId='formLastName'
+                className={styles.formGroup}
+              >
                 <Form.Label>Nazwisko</Form.Label>
                 <Form.Control
-                  name='lastName'
+                  name='last_name'
                   type='text'
                   placeholder='Wpisz nazwisko'
-                  value={values.lastName}
+                  value={values.last_name}
                   onBlur={handleBlur}
                   onChange={handleChange}
                 />
-                {touched.lastName && errors.lastName && (
-                  <FormError message={errors.lastName} />
+                {touched.last_name && errors.last_name && (
+                  <FormError message={errors.last_name} />
                 )}
               </Form.Group>
             </Row>
-            <Row className='py-3'>
-              <Form.Group as={Col} xsm={12} sm={6} controlId='formCity'>
+            <Row>
+              <Form.Group
+                as={Col}
+                xsm={12}
+                sm={6}
+                controlId='formCity'
+                className={styles.formGroup}
+              >
                 <Form.Label>Miejscowość</Form.Label>
                 <Form.Control
                   name='city'
@@ -95,24 +120,30 @@ const SummaryForm = () => {
                 )}
               </Form.Group>
 
-              <Form.Group as={Col} controlId='formZip'>
+              <Form.Group
+                as={Col}
+                controlId='formZip'
+                className={styles.formGroup}
+              >
                 <Form.Label>Kod pocztowy</Form.Label>
                 <Form.Control
-                  name='zip'
+                  name='zip_code'
                   type='text'
                   placeholder='Wpisz miejscowość'
-                  value={values.zip}
+                  value={values.zip_code}
                   onBlur={handleBlur}
                   onChange={handleChange}
                 />
-                {touched.zip && errors.zip && (
-                  <FormError message={errors.zip} />
+                {touched.zip_code && errors.zip_code && (
+                  <FormError message={errors.zip_code} />
                 )}
               </Form.Group>
             </Row>
-            <Button variant='primary' type='submit'>
-              ZAMAWIAM I PŁACĘ
-            </Button>
+            <div className='d-flex justify-content-center py-3'>
+              <CustomButton variant={ButtonVariants.Primary} type='submit'>
+                ZAMAWIAM I PŁACĘ
+              </CustomButton>
+            </div>
           </Form>
         )}
       </Formik>

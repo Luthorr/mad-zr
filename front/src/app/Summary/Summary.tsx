@@ -3,13 +3,27 @@ import SummaryForm from 'ui/organism/SummaryForm/SummaryForm';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import { useOrdersFormatter } from 'hooks/useOrdersData';
+import OrderFormData from 'shared/types/Order';
+import AppRoute from 'routing/AppRoutes.enum';
+import Navigator from 'ui/organism/Navigator/Navigator';
 
 const Summary = () => {
+  const orders = useOrdersFormatter();
+
+  if (!orders.length) {
+    return <Navigator to={AppRoute.Home} />;
+  }
+
+  const handleSubmition = (order: OrderFormData) => {
+    console.log({ order: orders, ...order });
+  };
+
   return (
     <Wrapper>
       <Container className='py-4'>
         <Row>
-          <SummaryForm />
+          <SummaryForm handleSubmition={handleSubmition} />
         </Row>
       </Container>
     </Wrapper>

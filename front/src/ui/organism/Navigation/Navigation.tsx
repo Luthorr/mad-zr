@@ -11,7 +11,7 @@ const Navigation = () => {
   return (
     <header>
       <Container>
-        <Navbar variant='dark' expand='lg' className={styles.navbar}>
+        <Navbar variant='light' expand='lg' className={styles.navbar}>
           <Navbar.Brand>
             <Logo />
           </Navbar.Brand>
