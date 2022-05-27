@@ -13,6 +13,7 @@ const BookCard = ({
   pages,
   price,
   title,
+  handleClick,
 }: BookCardProps) => {
   return (
     <Card className={styles.wrapper}>
@@ -29,13 +30,22 @@ const BookCard = ({
           <Card.Subtitle className='text-muted mt-2'>
             Stron: {pages}, Cena: {`${price} ${currency}`}
           </Card.Subtitle>
-          {/* <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text> */}
         </div>
         <div className='d-flex justify-content-center mt-3'>
-          <CustomButton variant={ButtonVariants.Primary}>
+          <CustomButton
+            variant={ButtonVariants.Primary}
+            handleClick={() =>
+              handleClick({
+                id,
+                author,
+                cover_url,
+                currency,
+                pages,
+                price,
+                title,
+              })
+            }
+          >
             DODAJ DO KOSZYKA
           </CustomButton>
         </div>

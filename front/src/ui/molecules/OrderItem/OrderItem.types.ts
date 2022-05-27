@@ -1,5 +1,5 @@
-import { Book } from 'shared/types/Book';
+import CartItem from 'shared/types/Cart';
 
-type OrderItemProps = Book;
+type OrderItemProps = CartItem;
 
 export default OrderItemProps;

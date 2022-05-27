@@ -1,51 +1,40 @@
-import { Book } from 'shared/types/Book';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
 import OrderItem from 'ui/molecules/OrderItem/OrderItem';
 
+import cartSvg from 'ui/assets/icons/cart.svg';
+import { Image } from 'react-bootstrap';
+
 const OrderList = () => {
-  const cart: Book[] = [
-    {
-      id: 457,
-      title: 'Matematyka 1. Podręcznik. Zakres podstawowy',
-      author: 'M. Karpiński, M. Dobrowolska, M. Braun, J. Lech',
-      cover_url: 'http://localhost:3001/static/cover/book/457.jpg',
-      pages: 280,
-      price: 3200,
-      currency: 'PLN',
-    },
-    {
-      id: 458,
-      title: 'Matematyka 1. Podręcznik. Zakres rozszerzony',
-      author: 'M. Karpiński, M. Dobrowolska, M. Braun, J. Lech',
-      cover_url: 'http://localhost:3001/static/cover/book/458.jpg',
-      pages: 300,
-      price: 3300,
-      currency: 'PLN',
-    },
-    {
-      id: 1246,
-      title: 'Matematyka z plusem 7. Podręcznik',
-      author: 'praca zbiorowa pod redakcją M. Dobrowolskiej',
-      cover_url: 'http://localhost:3001/static/cover/book/1246.jpg',
-      pages: 336,
-      price: 3420,
-      currency: 'PLN',
-    },
-  ];
+  const cart = useSelector((state: RootState) => state.cart.value);
 
   return (
     <div className='bg-white py-4 px-4 rounded d-flex flex-column gap-3'>
-      {cart.map(({ id, cover_url, title, author, pages, price, currency }) => (
-        <OrderItem
-          key={id}
-          id={id}
-          cover_url={cover_url}
-          title={title}
-          author={author}
-          pages={pages}
-          price={price}
-          currency={currency}
-        />
-      ))}
+      {cart.length ? (
+        cart.map(
+          ({ id, cover_url, title, author, pages, price, currency, qty }) => (
+            <OrderItem
+              key={id}
+              id={id}
+              cover_url={cover_url}
+              title={title}
+              author={author}
+              pages={pages}
+              price={price}
+              currency={currency}
+              qty={qty}
+            />
+          )
+        )
+      ) : (
+        <div className='d-flex flex-column justify-content-center align-items-center'>
+          <h4 className='text-center pt-3'>Brak produktów w koszyku.</h4>
+          <h6 className='text-center pb-3'>
+            Dodaj produkt, by go tu zobaczyć.
+          </h6>
+          <Image src={cartSvg} width={150} />
+        </div>
+      )}
     </div>
   );
 };

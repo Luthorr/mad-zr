@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import QueryProvider from './QueryProvider';
+import ReduxProvider from './ReduxProvider';
 import RouterProvider from './RouterProvider';
 
 type AppProvidersProps = {
@@ -8,9 +9,11 @@ type AppProvidersProps = {
 
 const AppProviders = ({ children }: AppProvidersProps) => {
   return (
-    <RouterProvider>
-      <QueryProvider>{children}</QueryProvider>
-    </RouterProvider>
+    <ReduxProvider>
+      <RouterProvider>
+        <QueryProvider>{children}</QueryProvider>
+      </RouterProvider>
+    </ReduxProvider>
   );
 };
 

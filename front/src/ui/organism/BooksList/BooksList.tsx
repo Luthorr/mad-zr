@@ -2,9 +2,13 @@ import { useBooksData } from 'hooks/useBooksData';
 import LoadingProgress from 'ui/atoms/LoadingProgress/LoadingProgress';
 import LoadingError from 'ui/atoms/LoadingError/LoadingError';
 import BookCard from 'ui/molecules/BookCard/BookCard';
+import { useDispatch } from 'react-redux';
+import { addToCart } from 'features/cartSlice';
+import { Book } from 'shared/types/Book';
 
 const BooksList = () => {
   const { data, isLoading, isError, isIdle } = useBooksData();
+  const dispatch = useDispatch();
 
   if (isLoading || isIdle) {
     return <LoadingProgress />;
@@ -14,7 +18,9 @@ const BooksList = () => {
     return <LoadingError />;
   }
 
-  console.log(data.data);
+  const handleAddToCart = (item: Book) => {
+    dispatch(addToCart(item));
+  };
 
   return (
     <div className='d-flex flex-wrap gap-5'>
@@ -29,6 +35,7 @@ const BooksList = () => {
             pages={pages}
             price={price}
             currency={currency}
+            handleClick={handleAddToCart}
           />
         )
       )}
