@@ -1,16 +1,14 @@
 import classnames from 'classnames';
-import ButtonVariants from 'constants/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import { Link } from 'react-router-dom';
 import AppRoute from 'routing/AppRoutes.enum';
-import CustomButton from 'ui/atoms/Button/Button';
 import Wrapper from 'ui/atoms/Wrapper/Wrapper';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/store';
 import OrderList from 'ui/organism/OrderList/OrderList';
 import styles from './Cart.module.css';
 import EmptyCart from 'ui/molecules/EmptyCart/EmptyCart';
+import LinkButton from 'ui/atoms/LinkButton/LinkButton';
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.value);
@@ -27,11 +25,7 @@ const Cart = () => {
             </Row>
             <Row>
               <div className={classnames('px-0', styles.buttonContainer)}>
-                <Link to={AppRoute.Summary}>
-                  <CustomButton variant={ButtonVariants.Primary}>
-                    DALEJ
-                  </CustomButton>
-                </Link>
+                <LinkButton to={AppRoute.Summary} text='DALEJ' />
               </div>
             </Row>
           </>

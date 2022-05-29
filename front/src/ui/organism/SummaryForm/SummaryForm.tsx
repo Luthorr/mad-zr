@@ -1,5 +1,4 @@
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,30 +6,9 @@ import FormError from 'ui/atoms/FormError/FormError';
 import SummaryFormProps from './SummaryForm.types';
 import CustomButton from 'ui/atoms/Button/Button';
 import ButtonVariants from 'constants/Button';
+import { validationSchema } from './SummartForm.constants';
 
 import styles from './SummaryForm.module.css';
-
-const validationSchema = Yup.object().shape({
-  first_name: Yup.string()
-    .min(4, '*Imię nie może być krótsze niż 4 znaki')
-    .max(100, '*Imię nie może być dłuższe niż 100 znaków')
-    .required('*Imię jest wymagane'),
-  last_name: Yup.string()
-    .min(5, '*Nazwisko nie może być krótsze niż 5 znaki')
-    .max(100, '*Nazwisko nie może być dłuższe niż 100 znaków')
-    .required('*Nazwisko jest wymagane'),
-  city: Yup.string()
-    .min(2, '*Nazwa miejscowości nie może być krótsza niż 2 znaki')
-    .max(100, '*Nazwa miejscowości nie może być dłuższa niż 100 znaków')
-    .required('*Nazwa miejscowości jest wymagana'),
-  zip_code: Yup.string()
-    .length(6, 'Kod pocztowy musi mieć dokładnie 6 znaków')
-    .matches(
-      /^[0-9]{2}(?:-[0-9]{3})?$/,
-      'Kod pocztowy może składać się wyłacznie z cyfr'
-    )
-    .required('*Kod pocztowy jest wymagany'),
-});
 
 const SummaryForm = ({ handleSubmition }: SummaryFormProps) => {
   return (

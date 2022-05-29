@@ -12,13 +12,21 @@ const Summary = () => {
   const orders = useOrdersFormatter();
   const { mutate, isError, isSuccess } = usePostOrder();
 
+  const handleSubmition = (order: OrderFormData) => {
+    mutate({ order: orders, ...order });
+  };
+
   if (!orders.length) {
     return <Navigator to={AppRoute.Home} />;
   }
 
-  const handleSubmition = (order: OrderFormData) => {
-    mutate({ order: orders, ...order });
-  };
+  if (isSuccess) {
+    return <Navigator to={AppRoute.SummarySuccess} />;
+  }
+
+  if (isError) {
+    return <Navigator to={AppRoute.SummaryError} />;
+  }
 
   return (
     <Wrapper>
