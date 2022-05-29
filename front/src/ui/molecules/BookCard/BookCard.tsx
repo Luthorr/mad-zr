@@ -25,7 +25,7 @@ const BookCard = ({
       />
       <Card.Body className={styles.content}>
         <div>
-          <Card.Title className='fw-bold'>Tytuł książki</Card.Title>
+          <Card.Title className='fw-bold'>{title}</Card.Title>
           <Card.Subtitle className='fw-bold'>{author}</Card.Subtitle>
           <Card.Subtitle className='text-muted mt-2'>
             Stron: {pages}

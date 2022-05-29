@@ -1,8 +1,25 @@
 .wrapper {
-  width: 18rem;
+  width: 23%;
   border: none !important;
 }
 
+@media (max-width: 1200px) {
+  .wrapper {
+    width: 30%;
+  }
+}
+
+@media (max-width: 990px) {
+  .wrapper {
+    width: 45% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .wrapper {
+    width: 100% !important;
+  }
+}
 .content {
   display: flex;
   flex-direction: column;
@@ -12,6 +29,5 @@
 
 .image {
   width: 100%;
-  max-width: 320px;
   height: 370px;
 }

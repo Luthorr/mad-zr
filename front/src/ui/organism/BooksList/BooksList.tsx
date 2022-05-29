@@ -34,7 +34,7 @@ const BooksList = () => {
     <>
       {data.data.length ? (
         <>
-          <div className='d-flex flex-wrap gap-5'>
+          <div className='d-flex flex-wrap gap-3'>
             {data.data.map(
               ({ id, cover_url, title, author, pages, price, currency }) => (
                 <BookCard
