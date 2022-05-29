@@ -2,7 +2,7 @@ import OrderItem from 'ui/molecules/OrderItem/OrderItem';
 
 import OrderListProps from './OrderList.types';
 
-const OrderList = ({ cart }: OrderListProps) => {
+const OrderList = ({ cart, handleBookDeletion }: OrderListProps) => {
   return (
     <div className='bg-white py-4 px-4 rounded d-flex flex-column gap-3'>
       {cart.map(
@@ -17,6 +17,7 @@ const OrderList = ({ cart }: OrderListProps) => {
             price={price}
             currency={currency}
             qty={qty}
+            handleBookDeletion={handleBookDeletion}
           />
         )
       )}

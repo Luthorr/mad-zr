@@ -32,39 +32,45 @@ const BooksList = () => {
 
   return (
     <>
-      <div className='d-flex flex-wrap gap-5'>
-        {data.data.map(
-          ({ id, cover_url, title, author, pages, price, currency }) => (
-            <BookCard
-              key={id}
-              id={id}
-              cover_url={cover_url}
-              title={title}
-              author={author}
-              pages={pages}
-              price={price}
-              currency={currency}
-              handleClick={handleAddToCart}
-            />
-          )
-        )}
-      </div>
-      <div className='d-flex gap-3 pt-5 pb-3 justify-content-center'>
-        <CustomButton
-          variant={ButtonVariants.Primary}
-          disabled={page === 1}
-          handleClick={() => paginate(page - 1)}
-        >
-          POPRZEDNIA
-        </CustomButton>
-        <CustomButton
-          variant={ButtonVariants.Primary}
-          disabled={page >= totalPages}
-          handleClick={() => paginate(page + 1)}
-        >
-          NASTĘPNA
-        </CustomButton>
-      </div>
+      {data.data.length ? (
+        <>
+          <div className='d-flex flex-wrap gap-5'>
+            {data.data.map(
+              ({ id, cover_url, title, author, pages, price, currency }) => (
+                <BookCard
+                  key={id}
+                  id={id}
+                  cover_url={cover_url}
+                  title={title}
+                  author={author}
+                  pages={pages}
+                  price={price}
+                  currency={currency}
+                  handleClick={handleAddToCart}
+                />
+              )
+            )}
+          </div>
+          <div className='d-flex gap-3 pt-5 pb-3 justify-content-center'>
+            <CustomButton
+              variant={ButtonVariants.Primary}
+              disabled={page === 1}
+              handleClick={() => paginate(page - 1)}
+            >
+              POPRZEDNIA
+            </CustomButton>
+            <CustomButton
+              variant={ButtonVariants.Primary}
+              disabled={page >= totalPages}
+              handleClick={() => paginate(page + 1)}
+            >
+              NASTĘPNA
+            </CustomButton>
+          </div>
+        </>
+      ) : (
+        <h4 className='text-center pb-3'>Brak wyników do wyświetlenia.</h4>
+      )}
     </>
   );
 };

@@ -3,13 +3,15 @@ import SummaryForm from 'ui/organism/SummaryForm/SummaryForm';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import { useOrdersFormatter, usePostOrder } from 'hooks/useOrdersData';
+import { useOrders, usePostOrder } from 'hooks/useOrdersData';
 import OrderFormData from 'shared/types/Order';
 import AppRoute from 'routing/AppRoutes.enum';
 import Navigator from 'ui/organism/Navigator/Navigator';
 
 const Summary = () => {
-  const orders = useOrdersFormatter();
+  const { formatOrders } = useOrders();
+  const orders = formatOrders();
+
   const { mutate, isError, isSuccess } = usePostOrder();
 
   const handleSubmition = (order: OrderFormData) => {
